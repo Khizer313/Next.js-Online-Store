@@ -1,0 +1,98 @@
+@import "../../css-config/mixin.scss";
+
+.footer {
+    width: 100%;
+
+    .footer-content {
+        padding: 50px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-flow: wrap;
+        gap: 20px;
+
+        @include lg {
+            justify-content: space-between;
+            padding: 50px 20px;
+        }
+
+        .col {
+            max-width: 300px;
+
+            .title {
+                margin-bottom: 20px;
+                font-size: 20px;
+            }
+
+            .text {
+                color: rgba(0, 0, 0, 0.5);
+                font-size: 14px;
+            }
+
+            .c-item {
+                display: flex;
+                margin-bottom: 10px;
+
+                svg {
+                    flex-shrink: 0;
+                    font-size: 14px;
+                    margin-right: 10px;
+                    margin-top: 4px;
+                    color: rgba(0, 0, 0, 0.5);
+                }
+            }
+        }
+    }
+
+    .bottom-bar {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+        .bottom-bar-content {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            gap: 10px;
+
+            @include md {
+                padding: 0;
+                height: 60px;
+                max-width: 1200px;
+                margin: 0 auto;
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+
+            .text {
+                font-size: 12px;
+                color: rgba(0, 0, 0, 0.5);
+            }
+        }
+    }
+
+    // Scroll-to-top button
+    .scroll-to-top {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        background: #8e2de2;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        transition: background 0.3s;
+
+        &:hover {
+            background: #6516aa;
+        }
+    }
+}

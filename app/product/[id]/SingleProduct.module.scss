@@ -1,0 +1,175 @@
+@import "../../../css-config/mixin.scss";
+
+.singleProductMainContent {
+  padding: 20px;                  // ⭐ Added full page padding
+  margin: 20px 0;
+
+  @include md {
+    padding: 40px 0;             // ⭐ More space on medium screens
+    margin: 60px 0;
+  }
+
+  .layout {
+    max-width: calc(100% - 30px);
+    margin: 0 auto;
+
+    @include md {
+      max-width: 1200px;
+    }
+  }
+
+  .singleProductPage {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;                    // ⭐ Items spaced nicely
+
+    @include lg {
+      flex-direction: row;
+      gap: 40px;
+    }
+  }
+
+  /* LEFT IMAGE */
+  .left {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.04);
+    padding: 15px;                // ⭐ Added padding around image
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include md {
+      width: 600px;
+      height: auto;
+    }
+
+    img {
+      width: 100%;
+      max-height: 500px;          // ⭐ Prevent big image overflow
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  }
+
+  /* RIGHT SIDE DETAILS */
+  .right {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background: white;
+    border-radius: 12px;          // ⭐ Card style
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    gap: 15px;
+
+    @include md {
+      padding: 25px 30px;
+    }
+
+    .name {
+      font-size: 22px;
+      font-weight: 600;
+
+      @include md {
+        font-size: 26px;
+      }
+    }
+
+    .price {
+      font-size: 26px;
+      font-weight: 600;
+      color: #8e2de2;
+    }
+
+    .desc {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #555;
+      max-width: 95%;
+      
+      @include md {
+        font-size: 16px;
+      }
+    }
+
+    /* CART BUTTONS */
+    .cartButtons {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+
+      @include md {
+        margin-top: 20px;
+      }
+
+      .quantityButtons {
+        display: flex;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        height: 50px;
+        border-radius: 8px;              // ⭐ Rounded
+
+        span {
+          font-size: 20px;
+          width: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          user-select: none;
+          color: #444;
+
+          &:nth-child(1) {
+            border-right: 2px solid rgba(0, 0, 0, 0.2);
+          }
+
+          &:nth-child(2) {
+            width: 60px;
+            font-weight: bold;
+          }
+
+          &:nth-child(3) {
+            border-left: 2px solid rgba(0, 0, 0, 0.2);
+          }
+        }
+      }
+
+      .addToCartButton {
+        height: 50px;
+        width: 180px;
+        border-radius: 8px;              // ⭐ Better button
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 16px;
+        color: white;
+        background: linear-gradient(135deg, #8e2de2, #4a00e0);
+        border-bottom: 3px solid #5014aa;
+
+        svg {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .divider {
+      height: 1px;
+      background-color: rgba(0, 0, 0, 0.1);
+      margin: 10px 0;
+    }
+
+    .infoItem {
+      .textBold {
+        font-size: 18px;
+        font-weight: 600;
+
+        span {
+          font-size: 16px;
+          color: #666;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}

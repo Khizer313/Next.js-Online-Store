@@ -1,0 +1,105 @@
+@import "../../css-config/mixin.scss";
+
+.products-container {
+    padding: 20px;
+    .sec-heading {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        text-align: center;
+
+        @include md {
+            font-size: 28px;
+            text-align: left;
+        }
+    }
+
+    .products {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+
+        @include md {
+            gap: 20px;
+        }
+    }
+}
+
+.product-card {
+    cursor: pointer;
+    flex: 1 1 calc(100% - 10px); // full width mobile
+
+    max-width: calc(100% - 10px);
+    margin-bottom: 20px;
+
+    @include sm {
+        flex: 1 1 calc(50% - 15px); // 2 per row (small devices)
+        max-width: calc(50% - 15px);
+    }
+
+    @include md {
+        flex: 1 1 calc(33.33% - 20px); // 3 per row (tablet)
+        max-width: calc(33.33% - 20px);
+    }
+
+    @include lg {
+        flex: 1 1 calc(25% - 20px); // 4 per row (desktop)
+        max-width: calc(25% - 20px);
+    }
+
+    .thumbnail {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1/1; // maintain square shape
+        background-color: rgba(0, 0, 0, 0.05);
+        margin-bottom: 10px;
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            transition: all ease 0.3s;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .prod-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        .name {
+            font-size: 14px;
+            font-weight: 500;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 100%;
+
+            @include md {
+                font-size: 16px;
+                margin-bottom: 8px;
+            }
+        }
+
+        .price {
+            font-size: 16px;
+            font-weight: 600;
+            color: #4a00e0;
+
+            @include md {
+                font-size: 20px;
+            }
+        }
+    }
+
+    &:hover {
+        .thumbnail img {
+            transform: scale(1.05);
+        }
+    }
+}

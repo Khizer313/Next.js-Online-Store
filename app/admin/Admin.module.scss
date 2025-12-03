@@ -1,0 +1,148 @@
+@import "../../css-config/mixin.scss";
+
+.loginWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0 10px; // mobile padding
+
+  .loginForm {
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 350px; // responsive width
+
+    h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    input {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px;
+      border: none;
+      background: #8e2de2;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+      &:hover {
+        background: #6516aa;
+      }
+    }
+  }
+}
+
+.dashboard {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-x: hidden; // prevent horizontal scroll
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    @include md {
+      font-size: 36px;
+    }
+  }
+
+  .forms {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @include md {
+      flex-direction: row;
+      gap: 30px;
+      flex-wrap: wrap; // allow wrapping if too wide
+    }
+  }
+
+  .formCard {
+    flex: 1 1 100%; // responsive: full width on mobile
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    min-width: 280px; // ensure card does not shrink too much
+
+    h3 {
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      input,
+      textarea {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+      }
+
+      button {
+        padding: 10px;
+        border: none;
+        background: #8e2de2;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+        &:hover {
+          background: #6516aa;
+        }
+      }
+
+      .preview {
+        margin-top: 10px;
+        width: 100%;
+        max-height: 200px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+    }
+
+    .list {
+      margin-top: 20px;
+
+      .listItem {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+
+        img {
+          width: 60px;
+          height: 60px;
+          object-fit: cover;
+          border-radius: 5px;
+        }
+
+        div {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+      }
+    }
+  }
+}
