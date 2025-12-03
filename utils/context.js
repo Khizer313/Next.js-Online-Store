@@ -1,8 +1,7 @@
-"use client"; // Important: Next.js client component
+"use client";
 
 import { createContext, useState, useEffect } from "react";
-// import { useLocation } from "react-router-dom"; // ❌ Remove this
-import { usePathname } from "next/navigation"; // ✅ Next.js hook
+import { usePathname } from "next/navigation";
 
 export const Context = createContext();
 
@@ -13,24 +12,24 @@ const AppContext = ({ children }) => {
   const [abouts, setAbouts] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [showCart, setShowCart] = useState(false);
-  const clearCart = () => setCartItems([]);
-
-  const [cartItems, setCartItems] = useState(() => {
-    const savedCart = localStorage.getItem("cartItems");
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
-
+  const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
   const [cartSubTotal, setCartSubTotal] = useState(0);
 
-  // ✅ Next.js path tracking
   const pathname = usePathname();
 
+  // Load cart from localStorage only on client
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cartItems");
+    if (savedCart) setCartItems(JSON.parse(savedCart));
+  }, []);
+
+  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [pathname]); // scroll on path change
+  }, [pathname]);
 
-  // Update cart totals and save to localStorage whenever cartItems change
+  // Update totals and save cart to localStorage
   useEffect(() => {
     let count = 0;
     let subTotal = 0;
@@ -43,37 +42,41 @@ const AppContext = ({ children }) => {
     setCartCount(count);
     setCartSubTotal(subTotal);
 
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    // Save to localStorage on client
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }
   }, [cartItems]);
 
- const handleAddToCart = (id, product, quantity) => {
-  if (!product || !product.title) return;
+  const handleAddToCart = (id, product, quantity) => {
+    if (!product || !product.title) return;
 
-  setCartItems((prevItems) => {
-    const index = prevItems.findIndex((p) => p.id === id);
-    let newCart;
+    setCartItems((prevItems) => {
+      const index = prevItems.findIndex((p) => p.id === id);
+      let newCart;
 
-    if (index !== -1) {
-      newCart = [...prevItems];
-      newCart[index].quantity += quantity;
-    } else {
-      newCart = [
-        ...prevItems,
-        {
-          id: id,
-          title: product.title,
-          price: product.price,
-          img: product.image, // ✔ FIX
-          quantity,
-        },
-      ];
-    }
+      if (index !== -1) {
+        newCart = [...prevItems];
+        newCart[index].quantity += quantity;
+      } else {
+        newCart = [
+          ...prevItems,
+          {
+            id,
+            title: product.title,
+            price: product.price,
+            img: product.image,
+            quantity,
+          },
+        ];
+      }
 
-    localStorage.setItem("cartItems", JSON.stringify(newCart));
-    return newCart;
-  });
-};
-
+      if (typeof window !== "undefined") {
+        localStorage.setItem("cartItems", JSON.stringify(newCart));
+      }
+      return newCart;
+    });
+  };
 
   const handleRemoveFromCart = (product) => {
     if (!product) return;
@@ -93,6 +96,8 @@ const AppContext = ({ children }) => {
 
     setCartItems(items);
   };
+
+  const clearCart = () => setCartItems([]);
 
   return (
     <Context.Provider
